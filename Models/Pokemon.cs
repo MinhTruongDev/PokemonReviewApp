@@ -10,5 +10,9 @@
 		public DateTime BirthDate { get; set; }
 		/// <summary>Reviews</summary>
 		public ICollection<Review> Reviews { get; set; }
+		/// <summary>Pokemon categories</summary>
+		public ICollection<PokemonCategory> PokemonCategories { get; set; }
+		/// <summary>Pokemon owners</summary>
+		public ICollection<PokemonOwner> PokemonOwners { get; set; }
 	}
 }
