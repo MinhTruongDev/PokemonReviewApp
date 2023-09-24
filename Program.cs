@@ -40,8 +40,9 @@ void SeedData(IHost app)
 		service.SeedDataContext();
 	}
 }
+
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
+if (app.Environment.IsDevelopment())
 {
 	app.UseSwagger();
 	app.UseSwaggerUI();
