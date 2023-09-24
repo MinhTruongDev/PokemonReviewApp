@@ -15,13 +15,13 @@ namespace PokemonReviewApp.Interfaces
 		/// </summary>
 		/// <param name="pokemonId">Pokemon id</param>
 		/// <returns>Pokemon</returns>
-		Pokemon GetPokemon(int pokemonId);
+		Pokemon? GetPokemon(int pokemonId);
 		/// <summary>
 		/// Get pokemon
 		/// </summary>
 		/// <param name="pokemonName">Pokemon name</param>
 		/// <returns>Pokemon</returns>
-		Pokemon GetPokemon(string pokemonName);
+		Pokemon? GetPokemon(string pokemonName);
 
 		/// <summary>
 		/// Get pokemon rating

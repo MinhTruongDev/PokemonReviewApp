@@ -18,7 +18,7 @@ namespace PokemonReviewApp.Interfaces
 		/// </summary>
 		/// <param name="categoryId">Category id</param>
 		/// <returns>Category</returns>
-		Category GetCategory(int categoryId);
+		Category? GetCategory(int categoryId);
 
 		/// <summary>
 		/// Get pokemons by category

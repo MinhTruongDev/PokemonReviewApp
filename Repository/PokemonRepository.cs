@@ -32,28 +32,22 @@ namespace PokemonReviewApp.Repository
 		/// </summary>
 		/// <param name="pokemonId">Pokemon id</param>
 		/// <returns>Pokemon</returns>
-		public Pokemon GetPokemon(int pokemonId)
+		public Pokemon? GetPokemon(int pokemonId)
 		{
-			var pokemon =  _context.Pokemons
+			return _context.Pokemons
 				.Where(p => p.Id == pokemonId)
 					.FirstOrDefault();
-			return (pokemon != null)
-				? pokemon
-				: new Pokemon();
 		}
 		/// <summary>
 		/// Get pokemon
 		/// </summary>
 		/// <param name="pokemonName">Pokemon name</param>
 		/// <returns>Pokemon</returns>
-		public Pokemon GetPokemon(string pokemonName)
+		public Pokemon? GetPokemon(string pokemonName)
 		{
-			var pokemon = _context.Pokemons
+			return _context.Pokemons
 				.Where(p => p.Name == pokemonName)
 					.FirstOrDefault();
-			return (pokemon != null)
-				? pokemon
-				: new Pokemon();
 		}
 
 		/// <summary>
@@ -77,7 +71,7 @@ namespace PokemonReviewApp.Repository
 		/// <param name="pokemonId">Pokemon id</param>
 		/// <returns>If exist this Pokemon: TRUE, esle: FALSE</returns>
 		public bool PokemonExists(int pokemonId)
-		{ 
+		{
 			return _context.Pokemons.Any(p => p.Id == pokemonId);
 		}
 	}
