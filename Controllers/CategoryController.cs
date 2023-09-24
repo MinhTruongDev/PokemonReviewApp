@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using PokemonReviewApp.Dto;
 using PokemonReviewApp.Interfaces;
-using PokemonReviewApp.Models;
 
 namespace PokemonReviewApp.Controllers
 {
@@ -49,7 +48,7 @@ namespace PokemonReviewApp.Controllers
 		/// <param name="categoryId">Category id</param>
 		/// <returns>Category</returns>
 		[HttpGet("{categoryId:int}")]
-		[ProducesResponseType(200, Type = typeof(IEnumerable<CategoryDto>))]
+		[ProducesResponseType(200, Type = typeof(CategoryDto))]
 		[ProducesResponseType(400)]
 		public IActionResult GetCategory(int categoryId)
 		{
@@ -69,7 +68,7 @@ namespace PokemonReviewApp.Controllers
 		/// </summary>
 		/// <param name="categoryId">Category id</param>
 		/// <returns>List of pokemons</returns>
-		[HttpGet("{categoryId:int}/pokemons")]
+		[HttpGet("Pokemon/{categoryId:int}")]
 		[ProducesResponseType(200, Type = typeof(IEnumerable<PokemonDto>))]
 		[ProducesResponseType(400)]
 		public IActionResult GetPokemonByCategory(int categoryId)
@@ -77,7 +76,8 @@ namespace PokemonReviewApp.Controllers
 			if (!_categoryRepository.CategoryExists(categoryId))
 				return NotFound();
 
-			var pokemons = _mapper.Map<List<PokemonDto>>(_categoryRepository.GetPokemonByCategory(categoryId));
+			var pokemons = _mapper.Map<List<PokemonDto>>(
+				_categoryRepository.GetPokemonByCategory(categoryId));
 
 			if (pokemons.Count <= 0)
 				return NotFound();

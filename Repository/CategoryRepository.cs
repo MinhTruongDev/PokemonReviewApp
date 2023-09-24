@@ -50,7 +50,7 @@ namespace PokemonReviewApp.Repository
 		{
 			return _context.PokemonCategories
 				.Where(pc => pc.CategoryId == categoryId)
-					.Select(c => c.Pokemon)
+					.Select(pc => pc.Pokemon)
 						.ToList();
 		}
 

@@ -6,6 +6,9 @@ using PokemonReviewApp.Models;
 
 namespace PokemonReviewApp.Controllers
 {
+	/// <summary>
+	/// Pokemon controller
+	/// </summary>
 	[Route("api/[controller]")]
 	[ApiController]
 	public class PokemonController : Controller
@@ -19,6 +22,10 @@ namespace PokemonReviewApp.Controllers
 			_mapper = mapper;
 		}
 
+		/// <summary>
+		/// Get pokemons
+		/// </summary>
+		/// <returns>List of pokemon</returns>
 		[HttpGet]
 		[ProducesResponseType(200, Type = typeof(IEnumerable<PokemonDto>))]
 		public IActionResult GetPokemons()
@@ -31,6 +38,11 @@ namespace PokemonReviewApp.Controllers
 			return Ok(pokemons);
 		}
 
+		/// <summary>
+		/// Get pokemon by id
+		/// </summary>
+		/// <param name="pokemonId">Pokemon id</param>
+		/// <returns>Pokemon</returns>
 		[HttpGet("{pokemonId:int}")]
 		[ProducesResponseType(200, Type = typeof(PokemonDto))]
 		[ProducesResponseType(400)]
@@ -47,6 +59,11 @@ namespace PokemonReviewApp.Controllers
 			return Ok(pokemon);
 		}
 
+		/// <summary>
+		/// Get pokemon by name
+		/// </summary>
+		/// <param name="pokemonName">Pokemon name</param>
+		/// <returns>Pokemon</returns>
 		[HttpGet("{pokemonName}")]
 		[ProducesResponseType(200, Type = typeof(PokemonDto))]
 		[ProducesResponseType(400)]
@@ -62,6 +79,11 @@ namespace PokemonReviewApp.Controllers
 			return Ok(pokemon);
 		}
 
+		/// <summary>
+		/// Get pokemon rating
+		/// </summary>
+		/// <param name="pokemonId">Pokemon id</param>
+		/// <returns>Pokemon rating</returns>
 		[HttpGet("{pokemonId}/rating")]
 		[ProducesResponseType(200, Type = typeof(decimal))]
 		[ProducesResponseType(400)]
