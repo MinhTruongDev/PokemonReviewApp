@@ -34,14 +34,11 @@ namespace PokemonReviewApp.Repository
 		/// </summary>
 		/// <param name="categoryId">Category id</param>
 		/// <returns>Category</returns>
-		public Category GetCategory(int categoryId)
+		public Category? GetCategory(int categoryId)
 		{
-			var category = _context.Categories
+			return _context.Categories
 				.Where(c => c.Id == categoryId)
 					.FirstOrDefault();
-			return (category != null)
-				? category
-				: new Category();
 		}
 
 		/// <summary>

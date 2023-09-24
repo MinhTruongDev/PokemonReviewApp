@@ -47,7 +47,7 @@ namespace PokemonReviewApp.Controllers
 			return Ok(pokemon);
 		}
 
-		[HttpGet("{pokemonName:string}")]
+		[HttpGet("{pokemonName}")]
 		[ProducesResponseType(200, Type = typeof(PokemonDto))]
 		[ProducesResponseType(400)]
 		public IActionResult GetPokemon(string pokemonName)
