@@ -3,13 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using PokemonReviewApp.Dto;
 using PokemonReviewApp.Interfaces;
 using PokemonReviewApp.Models;
+using PokemonReviewApp.Repository;
 
 namespace PokemonReviewApp.Controllers
 {
 	/// <summary>
 	/// Pokemon controller
 	/// </summary>
-	[Route("api/[controller]")]
+	[Route("/api/[controller]")]
 	[ApiController]
 	public class PokemonController : Controller
 	{
@@ -31,6 +32,44 @@ namespace PokemonReviewApp.Controllers
 		public IActionResult GetPokemons()
 		{
 			var pokemons = _mapper.Map<List<PokemonDto>>(_pokemonRepository.GetPokemons());
+
+			if (!ModelState.IsValid)
+				return BadRequest(ModelState);
+
+			return Ok(pokemons);
+		}
+
+		[HttpGet("by-owner/{ownerId:int}")]
+		[ProducesResponseType(200, Type = typeof(IEnumerable<PokemonDto>))]
+		[ProducesResponseType(400)]
+		public IActionResult GetPokemonByOwner(int ownerId)
+		{
+			var pokemons = _mapper.Map<List<PokemonDto>>(_pokemonRepository.GetPokemonByOwner(ownerId));
+
+			if (pokemons.Count < 1)
+				return NotFound();
+
+			if (!ModelState.IsValid)
+				return BadRequest(ModelState);
+
+			return Ok(pokemons);
+		}
+
+		/// <summary>
+		/// Get pokemons by category
+		/// </summary>
+		/// <param name="categoryId">Category id</param>
+		/// <returns>List of pokemons</returns>
+		[HttpGet("by-category/{categoryId:int}")]
+		[ProducesResponseType(200, Type = typeof(IEnumerable<PokemonDto>))]
+		[ProducesResponseType(400)]
+		public IActionResult GetPokemonByCategory(int categoryId)
+		{
+			var pokemons = _mapper.Map<List<PokemonDto>>(
+				_pokemonRepository.GetPokemonByCategory(categoryId));
+
+			if (pokemons.Count < 1)
+				return NotFound();
 
 			if (!ModelState.IsValid)
 				return BadRequest(ModelState);
@@ -64,7 +103,7 @@ namespace PokemonReviewApp.Controllers
 		/// </summary>
 		/// <param name="pokemonName">Pokemon name</param>
 		/// <returns>Pokemon</returns>
-		[HttpGet("{pokemonName}")]
+		[HttpGet("by-name/{pokemonName}")]
 		[ProducesResponseType(200, Type = typeof(PokemonDto))]
 		[ProducesResponseType(400)]
 		public IActionResult GetPokemon(string pokemonName)
@@ -84,7 +123,7 @@ namespace PokemonReviewApp.Controllers
 		/// </summary>
 		/// <param name="pokemonId">Pokemon id</param>
 		/// <returns>Pokemon rating</returns>
-		[HttpGet("{pokemonId}/rating")]
+		[HttpGet("rating/{pokemonId}")]
 		[ProducesResponseType(200, Type = typeof(decimal))]
 		[ProducesResponseType(400)]
 		public IActionResult GetPokemonRating(int pokemonId)

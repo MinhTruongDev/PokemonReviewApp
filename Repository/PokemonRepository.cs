@@ -65,6 +65,14 @@ namespace PokemonReviewApp.Repository
 			return (decimal)review.Sum(r => r.Rating) / review.Count();
 		}
 
+		public ICollection<Pokemon> GetPokemonByOwner(int ownerId)
+		{
+			return _context.PokemonOwners
+				.Where(po => po.OwnerId == ownerId)
+					.Select(po => po.Pokemon)
+						.ToList();
+		}
+
 		/// <summary>
 		/// Is this pokemon exists?
 		/// </summary>
@@ -73,6 +81,14 @@ namespace PokemonReviewApp.Repository
 		public bool PokemonExists(int pokemonId)
 		{
 			return _context.Pokemons.Any(p => p.Id == pokemonId);
+		}
+
+		public ICollection<Pokemon> GetPokemonByCategory(int categoryId)
+		{
+			return _context.PokemonCategories
+				.Where(pc => pc.CategoryId == categoryId)
+					.Select(pc => pc.Pokemon)
+						.ToList();
 		}
 	}
 }

@@ -40,18 +40,11 @@ namespace PokemonReviewApp.Repository
 				.Where(o => o.Id == ownerId)
 					.FirstOrDefault();
 		}
-
-		/// <summary>
-		/// Get pokemon by owner
-		/// </summary>
-		/// <param name="ownerId">Onwer id</param>
-		/// <returns>List of pokemons</returns>
-		public ICollection<Pokemon> GetPokemonByOwner(int ownerId)
+		public ICollection<Owner> GetOwnersByCountry(int countryId)
 		{
-			return _context.PokemonOwners
-				.Where(po => po.OwnerId == ownerId)
-					.Select(po => po.Pokemon)
-						.ToList();
+			return _context.Owners
+				.Where(c => c.Country.Id == countryId)
+					.ToList();
 		}
 
 		/// <summary>
@@ -63,5 +56,6 @@ namespace PokemonReviewApp.Repository
 		{
 			return _context.Owners.Any(o => o.Id == ownerId);
 		}
+
 	}
 }

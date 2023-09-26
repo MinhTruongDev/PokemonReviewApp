@@ -21,13 +21,6 @@ namespace PokemonReviewApp.Interfaces
 		Category? GetCategory(int categoryId);
 
 		/// <summary>
-		/// Get pokemons by category
-		/// </summary>
-		/// <param name="categoryId">Category id</param>
-		/// <returns>List of pokemons</returns>
-		ICollection<Pokemon> GetPokemonByCategory(int categoryId);
-
-		/// <summary>
 		/// Is category exist?
 		/// </summary>
 		/// <param name="categoryId">Category id</param>

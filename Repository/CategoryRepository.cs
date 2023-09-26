@@ -42,19 +42,6 @@ namespace PokemonReviewApp.Repository
 		}
 
 		/// <summary>
-		/// Get pokemons by category
-		/// </summary>
-		/// <param name="categoryId">Category id</param>
-		/// <returns>List of pokemons</returns>
-		public ICollection<Pokemon> GetPokemonByCategory(int categoryId)
-		{
-			return _context.PokemonCategories
-				.Where(pc => pc.CategoryId == categoryId)
-					.Select(pc => pc.Pokemon)
-						.ToList();
-		}
-
-		/// <summary>
 		/// Is category exist?
 		/// </summary>
 		/// <param name="categoryId">Category id</param>

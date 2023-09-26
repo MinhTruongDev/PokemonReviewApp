@@ -8,7 +8,7 @@ namespace PokemonReviewApp.Controllers
 	/// <summary>
 	/// Category controller
 	/// </summary>
-	[Route("api/[controller]")]
+	[Route("/api/[controller]")]
 	[ApiController]
 	public class CategoryController : Controller
 	{
@@ -62,31 +62,5 @@ namespace PokemonReviewApp.Controllers
 
 			return Ok(category);
 		}
-
-		/// <summary>
-		/// Get pokemons by category
-		/// </summary>
-		/// <param name="categoryId">Category id</param>
-		/// <returns>List of pokemons</returns>
-		[HttpGet("Pokemon/{categoryId:int}")]
-		[ProducesResponseType(200, Type = typeof(IEnumerable<PokemonDto>))]
-		[ProducesResponseType(400)]
-		public IActionResult GetPokemonByCategory(int categoryId)
-		{
-			if (!_categoryRepository.CategoryExists(categoryId))
-				return NotFound();
-
-			var pokemons = _mapper.Map<List<PokemonDto>>(
-				_categoryRepository.GetPokemonByCategory(categoryId));
-
-			if (pokemons.Count <= 0)
-				return NotFound();
-
-			if (!ModelState.IsValid)
-				return BadRequest(ModelState);
-
-			return Ok(pokemons);
-		}
-
 	}
 }
